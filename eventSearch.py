@@ -4,7 +4,6 @@ from login import *
 from urllib3.exceptions import InsecureRequestWarning
 urllib3.disable_warnings(InsecureRequestWarning)
 
-login_url = "https://localhost:60000/api/login"
 api_url = "https://localhost:60000/api/events/search"
 
 test = {
@@ -35,16 +34,8 @@ test = {
   }
 }
 
-login_data = {
-    "User": {
-        "login_id": "admin",
-        "password": "Admin1234"
-    }
-}
-
 try:
     bs_session_id = login()
-    print(bs_session_id)
     response = requests.post(api_url, headers={"bs-session-id": bs_session_id}, json=test, verify=False)
     if response.status_code == 200:
         data = response.json()
